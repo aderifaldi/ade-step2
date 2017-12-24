@@ -21,12 +21,9 @@ public abstract class BaseApi {
     static final String BASE_URL = Constant.BUKALAPAK;
     static final int TIMEOUT = 60;
 
-    ApiService mApiService;
-    ApiResponse apiResponse;
+    ApiService apiService;
 
     public BaseApi() {
-
-        apiResponse = new ApiResponse();
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
@@ -47,7 +44,7 @@ public abstract class BaseApi {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(okHttpClient).build();
 
-        mApiService = retrofit.create(ApiService.class);
+        apiService = retrofit.create(ApiService.class);
     }
 
     abstract public void onFinishRequest(boolean success, ApiResponse response);

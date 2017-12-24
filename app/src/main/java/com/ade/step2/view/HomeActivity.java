@@ -3,7 +3,6 @@ package com.ade.step2.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.ade.step2.R;
@@ -14,7 +13,7 @@ import com.ade.step2.model.api.Product;
 import com.ade.step2.model.local.User;
 import com.ade.step2.viewmodel.ProductListVM;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity implements BaseActivity.ApiResponseCallback {
 
     private TextView username;
 
@@ -54,6 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
     public void loadResponse(boolean success, ApiResponse apiResponse) {
         if (success) {
             Product data = (Product) apiResponse.getData();
@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
             }
+
         }
     }
 

@@ -3,6 +3,7 @@ package com.ade.step2.data.api;
 import android.content.Context;
 
 import com.ade.step2.data.cache.AppDatabase;
+import com.ade.step2.model.api.ApiResponse;
 import com.ade.step2.model.api.Product;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -21,13 +22,15 @@ public abstract class GetProductList extends BaseApi {
     private final Context context;
     private AppDatabase db;
     private int cacheType;
+    private ApiResponse apiResponse;
 
     public GetProductList(Context context, AppDatabase db, int cacheType) {
         this.context = context;
         this.cacheType = cacheType;
         this.db = db;
 
-        Call<Product> call = mApiService.loadProduct();
+        Call<Product> call = apiService.loadProduct();
+        apiResponse = new ApiResponse();
 
         call.enqueue(new Callback<Product>() {
             @Override
