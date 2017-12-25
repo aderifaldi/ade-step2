@@ -24,7 +24,7 @@ public abstract class GetProductList extends BaseApi {
     private int cacheType;
     private ApiResponse apiResponse;
 
-    public GetProductList(Context context, AppDatabase db, int cacheType) {
+    protected GetProductList(Context context, AppDatabase db, int cacheType) {
         this.context = context;
         this.cacheType = cacheType;
         this.db = db;

@@ -3,19 +3,22 @@ package com.ade.step2.view;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.ade.step2.R;
 import com.ade.step2.data.cache.AppDatabase;
+import com.ade.step2.data.cache.CacheManager;
 import com.ade.step2.helper.Constant;
 import com.ade.step2.model.api.ApiResponse;
 import com.ade.step2.model.api.Product;
 import com.ade.step2.model.local.User;
 import com.ade.step2.viewmodel.ProductListVM;
+import com.google.gson.Gson;
 
 public class HomeActivity extends BaseActivity implements BaseActivity.ApiResponseCallback {
 
-    private TextView username;
+    private RecyclerView listProduct;
 
     private Intent intent;
 
@@ -23,6 +26,9 @@ public class HomeActivity extends BaseActivity implements BaseActivity.ApiRespon
 
     private ProductListVM viewModel;
     private AppDatabase db;
+
+    private LinearLayoutManager linearLayoutManager;
+    private ProductListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +43,15 @@ public class HomeActivity extends BaseActivity implements BaseActivity.ApiRespon
         viewModel = ViewModelProviders.of(this).get(ProductListVM.class);
         db = AppDatabase.getDatabase(getApplicationContext());
 
-        username = findViewById(R.id.username);
+        listProduct = findViewById(R.id.list_product);
 
-        if (user != null) {
-            username.setText(user.getUsername());
-        }
+        linearLayoutManager = new LinearLayoutManager(this);
+        adapter = new ProductListAdapter(this);
 
-        viewModel.loadProduuctList(HomeActivity.this, db, Constant.CACHE_PRODUCT);
+        listProduct.setLayoutManager(linearLayoutManager);
+        listProduct.setAdapter(adapter);
+
+        viewModel.loadProductList(HomeActivity.this, db, Constant.CACHE_PRODUCT);
 
     }
 
@@ -55,18 +63,22 @@ public class HomeActivity extends BaseActivity implements BaseActivity.ApiRespon
 
     @Override
     public void loadResponse(boolean success, ApiResponse apiResponse) {
+        Product data = (Product) apiResponse.getData();
+
         if (success) {
-            Product data = (Product) apiResponse.getData();
-
-            if (data != null) {
-                if (data.getStatus().equals("OK")) {
-                    for (int i = 0; i < data.getProducts().size(); i++) {
-
-                    }
-                }
-            }
-
+            CacheManager.storeCache(db, Constant.CACHE_PRODUCT, new Gson().toJson(data));
         }
+
+        if (data != null) {
+            if (data.getStatus().equals("OK")) {
+                for (int i = 0; i < data.getProducts().size(); i++) {
+                    adapter.getData().add(data.getProducts().get(i));
+                    adapter.notifyItemInserted(adapter.getData().size() - 1);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+
     }
 
 }

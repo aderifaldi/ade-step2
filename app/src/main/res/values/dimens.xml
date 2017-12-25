@@ -5,4 +5,5 @@
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_normal">16dp</dimen>
     <dimen name="splash_logo_size">100dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
 </resources>

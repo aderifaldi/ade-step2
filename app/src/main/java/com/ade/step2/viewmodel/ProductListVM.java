@@ -14,7 +14,7 @@ import com.ade.step2.view.HomeActivity;
 
 public class ProductListVM extends ViewModel {
 
-    public void loadProduuctList(final Context context, AppDatabase db, int cacheType) {
+    public void loadProductList(final Context context, AppDatabase db, int cacheType) {
         new GetProductList(context, db, cacheType) {
             @Override
             public void onFinishRequest(boolean success, ApiResponse response) {
