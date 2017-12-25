@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.ade.step2.helper.Constant;
 import com.ade.step2.model.local.User;
-import com.ade.step2.view.HomeActivity;
+import com.ade.step2.view.activity.HomeActivity;
 
 /**
  * Created by aderifaldi on 2017-12-24.

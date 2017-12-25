@@ -1,6 +1,8 @@
 package com.ade.step2.data.api;
 
+import android.app.Activity;
 import android.content.Context;
+import android.widget.Toast;
 
 import com.ade.step2.data.cache.AppDatabase;
 import com.ade.step2.model.api.ApiResponse;
@@ -19,13 +21,13 @@ import retrofit2.Response;
 
 public abstract class GetProductList extends BaseApi {
 
-    private final Context context;
+    private final Activity context;
     private AppDatabase db;
     private int cacheType;
     private ApiResponse apiResponse;
 
-    protected GetProductList(Context context, AppDatabase db, int cacheType) {
-        this.context = context;
+    protected GetProductList(final Activity activity, AppDatabase db, int cacheType) {
+        this.context = activity;
         this.cacheType = cacheType;
         this.db = db;
 
@@ -47,6 +49,7 @@ public abstract class GetProductList extends BaseApi {
 
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
+                Toast.makeText(activity, "Failed getting data from server", Toast.LENGTH_SHORT).show();
                 Product product = loadCache();
                 if (product != null) {
                     apiResponse.setData(product);

@@ -1,10 +1,11 @@
-package com.ade.step2.view;
+package com.ade.step2.view.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.ade.step2.R;
 import com.ade.step2.data.cache.AppDatabase;
@@ -13,6 +14,7 @@ import com.ade.step2.helper.Constant;
 import com.ade.step2.model.api.ApiResponse;
 import com.ade.step2.model.api.Product;
 import com.ade.step2.model.local.User;
+import com.ade.step2.view.adapter.ProductListAdapter;
 import com.ade.step2.viewmodel.ProductListVM;
 import com.google.gson.Gson;
 
@@ -21,6 +23,8 @@ public class HomeActivity extends BaseActivity implements BaseActivity.ApiRespon
     private RecyclerView listProduct;
 
     private Intent intent;
+
+    private TextView username;
 
     private User user;
 
@@ -44,6 +48,9 @@ public class HomeActivity extends BaseActivity implements BaseActivity.ApiRespon
         db = AppDatabase.getDatabase(getApplicationContext());
 
         listProduct = findViewById(R.id.list_product);
+        username = findViewById(R.id.username);
+
+        username.setText("Login as " + user.getUsername());
 
         linearLayoutManager = new LinearLayoutManager(this);
         adapter = new ProductListAdapter(this);

@@ -5,7 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ade.step2.view.HomeActivity">
+    tools:context="com.ade.step2.view.activity.HomeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="@dimen/appbar_height"
+        android:padding="@dimen/padding_normal">
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Login as"
+            android:textColor="@color/color_white"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_product"

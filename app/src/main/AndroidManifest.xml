@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.ade.step2.view.SplashScreenActivity">
+        <activity android:name="com.ade.step2.view.activity.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ade.step2.view.LoginActivity" />
-        <activity android:name="com.ade.step2.view.HomeActivity" />
+        <activity android:name="com.ade.step2.view.activity.LoginActivity" />
+        <activity android:name="com.ade.step2.view.activity.HomeActivity" />
     </application>
 
 </manifest>

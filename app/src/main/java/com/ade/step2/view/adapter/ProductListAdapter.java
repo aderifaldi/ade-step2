@@ -1,4 +1,4 @@
-package com.ade.step2.view;
+package com.ade.step2.view.adapter;
 
 //http://stackoverflow.com/questions/26585941/recyclerview-header-and-footer
 

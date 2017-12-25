@@ -1,4 +1,4 @@
-package com.ade.step2.view;
+package com.ade.step2.view.activity;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.app.AppCompatActivity;
